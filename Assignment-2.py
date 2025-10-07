@@ -451,7 +451,7 @@ def writes(pos):
     writers[pos].clear()
     val = board[pos]
     # val != 16
-    if val is not None:
+    if val != "Z":
         writers[pos].write(val, font=("Arial",18,"bold"))
 
 '''
