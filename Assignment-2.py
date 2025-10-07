@@ -9,13 +9,13 @@ Sliding Game Python
 Requirements
 # pip install Pythonturtle random2 os-sys pypi-json
 '''
-#pip install Pythonturtle
+
 import turtle
-#pip install random2
+
 import random
-#pip install os-sys
+
 import os
-#pip install pypi-json
+
 import json
 
 '''
@@ -108,19 +108,23 @@ Input of Difficulty and Difficulty Patterns Predefined (Got from Real Game Envir
 '''
 #Selection of Easy , Medium , Hard Sets from these 4 Sets
 difficulty = turtle.textinput("Welcome to Sliding Game:","Enter Difficulty E/M/H")
-easy1 = ['A','B','C','D','E','G','O','H','I','J','F','K','M','N',None,'L']
-easy2 = ['A','B','C','D','E','F','G','H','M','J','K','L','N',None,'I','O']
-easy3 = ['A','B','C','D','E','F','G','H','M','J','K','L','N','I',None,'O']
-easy4 = ['A','B','C','D','E','F','G','H','I','J','K','L','M',None,'N','O']
-medium1 = ['A','B','H','C','E','F','D','L','J','N','M','K','I','O',None,'G']
-medium2 = ['A','B','C','D','E','I','F','L','J','N','M','K','G','H',None,'O']
-medium3 = ['A','B','C','D','E','F','L','H','J','N','M','K','I','G',None,'O']
-medium4 = ['A','B','G','N','I','E','C','H','M','K','O','F',None,'J','L','D']
-hard1 = ['F','E','B','D','A','C','L','G','N','M',None,'H','K','J','I','O']
-hard2 = ['E','D','C','H','A','K','G','L','F','N','B','I','M','J','O',None]
-hard3 = ['B','A','D',None,'E','K','C','L','M','J','F','O','N','I','H','G']
-hard4 = ['C','E','B','D','A','G','L','H','N','M',None,'F','K','J','O','I']
+# EASY
+easy1 = ['A','B','C','D','E','G','O','H','I','J','F','K','M','N','L','Z']
+easy2 = ['A','B','C','D','E','F','G','H','M','J','K','L','N','I','O','Z']
+easy3 = ['A','B','C','D','E','F','G','H','M','J','K','L','N','I','O','Z']
+easy4 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','Z']
 
+# MEDIUM
+medium1 = ['A','B','H','C','E','F','D','L','J','N','M','K','I','O','G','Z']
+medium2 = ['A','B','C','D','E','I','F','L','J','N','M','K','G','H','O','Z']
+medium3 = ['A','B','C','D','E','F','L','H','J','N','M','K','I','G','O','Z']
+medium4 = ['A','B','G','N','I','E','C','H','M','K','O','F','J','L','D','Z']
+
+# HARD
+hard1   = ['F','E','B','D','A','C','L','G','N','M','H','K','J','I','O','Z']
+hard2   = ['E','D','C','H','A','K','G','L','F','N','B','I','M','J','O','Z']
+hard3   = ['B','A','D','E','K','C','L','M','J','F','O','N','I','H','G','Z']
+hard4   = ['C','E','B','D','A','G','L','H','N','M','F','K','J','O','I','Z']
 '''
 Selects the Difficulty Arrangement Randomly
 '''
@@ -318,7 +322,7 @@ for (x,y),num in board.items():
     k.goto(x,y)
     k.pendown()
     #num != 16
-    if num is not None :
+    if num != "Z" :
         k.write(num,font =("Arial",18,"bold"))
     else:
         empty_pos = (x,y)
@@ -418,7 +422,7 @@ def checkwin():
     # nums == list(range(1,17))
     # nums == ["अ","आ","इ","ई","उ","ऊ","ऋ","ए","ऐ","ओ","औ","अं","अः","क","ख",None]
     # nums == ["అ","ఆ","ఇ","ఈ","ఉ","ఊ","ఋ","ౠ","ఎ","ఏ","ఐ","ఒ","ఓ","ఔ","అం",None]
-    if nums == ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',None]:
+    if nums == ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','Z']:
         turtle.clearscreen()
         w = turtle.Turtle()
         w.hideturtle()
