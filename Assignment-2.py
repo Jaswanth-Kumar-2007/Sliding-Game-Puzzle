@@ -145,11 +145,11 @@ j.goto(-200,-200)
 j.pendown()
 
 '''
-Function : grid_drawer
+Function : draw_grid
 #Draws the Sqaure
 '''
 #Square Outline Draw
-def grid_drawer():
+def draw_grid():
     for i in range(4):
        j.forward(400)
        j.left(90)
@@ -177,14 +177,9 @@ def grid_drawer():
        j.forward(400)
        j.setheading(90)
        
-#Square initiation
-grid_drawer()
-
-
-#Storage For Saving Moves
+#Draws the Square
+draw_grid()
 j.width(None)
-global storage
-storage = []
 
 '''
 Assigning Numbers to Only this Respective Positions
@@ -192,14 +187,6 @@ Assigning Numbers to Only this Respective Positions
 #Assigning Points
 points = [(-150,150),(-50,150),(50,150),(150,150),(-150,50),(-50,50),(50,50),(150,50),(-150,-50),(-50,-50),(50,-50),(150,-50),(-150,-150),(-50,-150),(50,-150),(150,-150)]
 
-'''
-#numbers = list(range(1,17))
-#alphabets = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',None]
-#alphabets = ["अ","आ","इ","ई","उ","ऊ","ऋ","ए","ऐ","ओ","औ","अं","अः","क","ख",None]
-#alphabets = ["అ","ఆ","ఇ","ఈ","ఉ","ఊ","ఋ","ౠ","ఎ","ఏ","ఐ","ఒ","ఓ","ఔ","అం",None]
-#random.shuffle(numbers)
-#random.shuffle(alphabets)
-'''
 
 '''
 Defines the CheckPoint Variables
@@ -246,7 +233,7 @@ def leaderboard():
     # Display leaderboard
     h = 140
     SNo = 1
-    for entry in leaderboarddata:
+    for entry in leaderboarddata and SNo < 4:
         y.goto(-250, h)
         # Format time as MM:SS
         min = entry['time'] // 60
@@ -259,10 +246,10 @@ def leaderboard():
         SNo += 1
 
 '''
-Function : l_checkpoint
+Function : checkpoint_load
 #It Opens the Checkpoint
 '''
-def l_point():
+def checkpoint_load():
     global board
     file = f"{name}.json"
     if os.path.exists(file):
@@ -308,7 +295,7 @@ else:
     board = dict(zip(points, alphabets))
 
 '''
-Starts Assigns the Numbers For Every Position there will
+Starts Assigns the Alphabets For Every Position there will
 Be Defined New Turtle
 '''
 #Assign Alphabets(or Numbers) to a Position
@@ -329,10 +316,10 @@ for (x,y),num in board.items():
     writers[(x,y)] = k
 
 '''
-Function: s_point
+Function: checkpoint_save
 It defines that Save the All Position By Name
 '''
-def s_point():
+def checkpoint_save():
     global q
     d = {
         "board": {str(pos): val for pos, val in board.items()},
@@ -348,8 +335,7 @@ Displays the Time , Difficult and Counter
 '''
 #Time , Difficulty and Move Counter Intiation
 global movecounter, p
-movecounter = 0
-p = 0
+
     
 count = turtle.Turtle()
 count.pencolor("#00ff00")
@@ -376,16 +362,16 @@ difficulty.pendown()
 Function : update_move
 Updates all the Count
 '''
-def count_move():
+def update_move():
     global movecounter
     count.clear()
     count.write(f"Moves:{movecounter}",font =("Arial",14,"bold"))
 
 '''
-Function : difficultycheck
+Function : difficulty
 Displays the Diificulty on Screen
 '''
-def difficultycheck():
+def difficulty():
     global q
     difficulty.write(f"Mode:{q}",font =("Arial",14,"bold"))
 
@@ -395,8 +381,8 @@ Displays the Time By Repeating Function For Every 1s
 '''
 def update_time():
     global timecounter,p
-    count_move()
-    difficultycheck()
+    update_move()
+    difficulty()
     if p == 0:
         timecounter += 1
     else:
@@ -419,9 +405,6 @@ def checkwin():
     global p,storage
     ordered = [(-150,150),(-50,150),(50,150),(150,150),(-150,50),(-50,50),(50,50),(150,50),(-150,-50),(-50,-50),(50,-50),(150,-50),(-150,-150),(-50,-150),(50,-150),(150,-150)]
     nums = [board[pos] for pos in ordered]
-    # nums == list(range(1,17))
-    # nums == ["अ","आ","इ","ई","उ","ऊ","ऋ","ए","ऐ","ओ","औ","अं","अः","क","ख",None]
-    # nums == ["అ","ఆ","ఇ","ఈ","ఉ","ఊ","ఋ","ౠ","ఎ","ఏ","ఐ","ఒ","ఓ","ఔ","అం",None]
     if nums == ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','Z']:
         turtle.clearscreen()
         w = turtle.Turtle()
@@ -441,7 +424,7 @@ def checkwin():
         
 #Time Intiation
 update_time()
-name_saver()
+save_name()
 
 '''
 Function : writers
@@ -469,9 +452,9 @@ def up():
         empty_pos = (x,y-100)
         storage.append(empty_pos)
         movecounter += 1
-        count_move()
+        update_move()
         checkwin()
-        s_point()
+        checkpoint_save()
 
 # Down Function
 def down():
@@ -484,9 +467,9 @@ def down():
         empty_pos = (x,y+100)
         storage.append(empty_pos)
         movecounter += 1
-        count_move()
+        update_move()
         checkwin()
-        s_point()
+        checkpoint_save()
 
 #Left Function
 def left():
@@ -499,9 +482,9 @@ def left():
         empty_pos = (x+100,y)
         storage.append(empty_pos)
         movecounter += 1
-        count_move()
+        update_move()
         checkwin()
-        s_point()
+        checkpoint_save()
 
 # Right Function
 def right():
@@ -514,9 +497,9 @@ def right():
         empty_pos = (x-100,y)
         storage.append(empty_pos)
         movecounter += 1
-        count_move()
+        update_move()
         checkwin()
-        s_point()
+        checkpoint_save()
         
 
 
