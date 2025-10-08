@@ -22,7 +22,7 @@
 
 - [ ] Moves Display: Update and display the move count on the interface.
 
-- [ ] Remove Unneeded Dependencies: Delete references to random2, os-sys, and pip-install notes for standard libraries.
+- [x] Remove Unneeded Dependencies: Delete references to random2, os-sys, and pip-install notes for standard libraries.
 
 - [ ] Simplify Imports: Use only standard Python libraries (random, json, time, turtle).
 

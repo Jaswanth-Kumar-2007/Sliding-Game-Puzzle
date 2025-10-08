@@ -19,7 +19,7 @@ import os
 import json
 
 '''
-Beginning of the Screen
+Screen Starts here . Building Basic of the Screen
 '''
 #Screen Output Start
 s = turtle.Turtle()
@@ -47,7 +47,6 @@ Turtle Delays some Time from Start Screen to Name Input
 '''
 #Wait Until Some Time
 turtle.delay(3000)
-
 turtle.clearscreen()
 
 '''
@@ -59,18 +58,18 @@ j.screen.bgcolor("Black")
 j.pencolor("#00ff00")
 
 '''
-Input Your Name
+Take the Name Input 
 '''
 #Enter Name
 name = []
 name = turtle.textinput("Welcome to Sliding Game:", "Enter your Name")
 
 '''
-Function : name_saver
+Function : save_name
 Makes the Names to store in name_data.json file
 '''
 #Saves All the Name of Players
-def name_saver():
+def save_name():
     global names
     names.append(name)
     n = {"name" : names}
@@ -78,11 +77,11 @@ def name_saver():
         json.dump(n,t)
  
 '''
-Function : name_loader
+Function : load_name
 Makes the Names to load out from file
 '''
 #Loads the Player Names
-def name_loader():
+def load_name():
     global names
     names = [] 
     with open("name_data.json","r") as t:
@@ -90,7 +89,7 @@ def name_loader():
     names =  n["name"]
 
 '''
-Checks the Name of the File is there and procced through Next Command
+Checks the name_data.json is there , if not there create that file
 '''
 # CHeck the First Time or Not (File Created or Not)
 file = "name_data.json"
@@ -104,7 +103,8 @@ else:
     namep = list(set(names))
 
 '''
-Input of Difficulty and Difficulty Patterns Predefined (Got from Real Game Environment)
+Input of Difficulty and Difficulty Patterns Predefined (Got from Real Game Environment) , 
+they are working checked already
 '''
 #Selection of Easy , Medium , Hard Sets from these 4 Sets
 difficulty = turtle.textinput("Welcome to Sliding Game:","Enter Difficulty E/M/H")
