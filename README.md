@@ -16,17 +16,17 @@
 
 - [ ] Save & Load History: Include move history in checkpoint JSON for proper resumption.
 
-- [ ] Grid Drawing: Verify the grid always draws with correct positions and labels, including Z for the blank.
+- [x] Grid Drawing: Verify the grid always draws with correct positions and labels, including Z for the blank.
 
-- [ ] Time Format: Display timer in MM:SS format consistently.
+- [x] Time Format: Display timer in MM:SS format consistently.
 
-- [ ] Moves Display: Update and display the move count on the interface.
+- [] Moves Display: Update and display the move count on the interface.
 
 - [x] Remove Unneeded Dependencies: Delete references to random2, os-sys, and pip-install notes for standard libraries.
 
-- [ ] Simplify Imports: Use only standard Python libraries (random, json, time, turtle).
+- [x] Simplify Imports: Use only standard Python libraries (random, json, time, turtle).
 
-- [ ] Improve Naming: Use clear, consistent names for functions and variables (e.g., draw_grid(), save_game(), check_win()).
+- [x] Improve Naming: Use clear, consistent names for functions and variables (e.g., draw_grid(), save_game(), check_win()).
 
 - [ ] Add Brief Comments: Provide short doc-style comments for core functions:
   - `draw_grid()` – draw board and tiles  
@@ -34,8 +34,8 @@
   - `save_game()` / `load_game()` – checkpoint/resume  
   - `check_win()` – evaluate winning condition
 
-- [ ] Test all difficulty levels (easy/medium/hard) to ensure solvable layouts and correct starting position.
+- [x] Test all difficulty levels (easy/medium/hard) to ensure solvable layouts and correct starting position.
 
-- [ ] Confirm JSON save/load works across sessions.
+- [x] Confirm JSON save/load works across sessions.
 
-- [ ] Review for consistent style and “student-written” clarity.
+- [x] Review for consistent style and “student-written” clarity.
