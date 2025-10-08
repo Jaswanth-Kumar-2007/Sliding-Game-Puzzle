@@ -233,7 +233,7 @@ def leaderboard():
     # Display leaderboard
     h = 140
     SNo = 1
-    for entry in leaderboarddata and SNo < 4:
+    for entry in leaderboarddata[:3]:
         y.goto(-250, h)
         # Format time as MM:SS
         min = entry['time'] // 60

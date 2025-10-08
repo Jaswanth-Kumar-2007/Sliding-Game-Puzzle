@@ -8,11 +8,11 @@
 
 - [ ] Record Moves & Time: Store both move count and time (MM:SS) in the leaderboard JSON.
 
-- [ ] Sort & Filter Leaderboard: Sort by difficulty → time, and display top-3 entries only.
+- [x] Sort & Filter Leaderboard: Sort by difficulty → time, and display top-3 entries only.
 
 - [ ] Checkpoint/Resume: Ensure the game can save and resume with all data: grid, blank position, move count, elapsed time, and full move history.
 
-- [ ] Track Actual Moves: Store a list of tile labels moved (e.g., ["C","G","D",…]) or directions ("UP", "LEFT") instead of just blank coordinates.
+- [x] Track Actual Moves: Store a list of tile labels moved (e.g., ["C","G","D",…]) or directions ("UP", "LEFT") instead of just blank coordinates.
 
 - [ ] Save & Load History: Include move history in checkpoint JSON for proper resumption.
 
