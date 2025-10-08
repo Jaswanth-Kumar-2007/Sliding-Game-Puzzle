@@ -94,12 +94,12 @@ Checks the name_data.json is there , if not there create that file
 # CHeck the First Time or Not (File Created or Not)
 file = "name_data.json"
 if os.path.exists(file):
-    name_loader()
-    name_saver()
+    load_name()
+    save_name()
     namep = list(set(names))
 else:
     names = []
-    name_saver()
+    save_name()
     namep = list(set(names))
 
 '''
