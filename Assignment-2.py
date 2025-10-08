@@ -266,7 +266,7 @@ q = "Difficulty"
 if os.path.exists(f"{name}.json"):
     choice = turtle.textinput("Checkpoint Found", "Do you want to continue? (Y/N)")
     if  choice in  ('Y','y'):
-        l_point()
+        checkpoint_load()
     else:
         if difficulty in ('E', 'e'):
             q = "Easy"
@@ -323,7 +323,8 @@ def checkpoint_save():
     global q
     d = {
         "board": {str(pos): val for pos, val in board.items()},
-        "timecount":timecounter,
+        "timecounter1":timecounter,
+        "movecounter1":movecounter,
         "difficulty":q
     }
     with open(f"{name}.json", "w") as t:
@@ -334,7 +335,8 @@ def checkpoint_save():
 Displays the Time , Difficult and Counter
 '''
 #Time , Difficulty and Move Counter Intiation
-global movecounter, p
+global p
+p = 0
 
     
 count = turtle.Turtle()
@@ -363,15 +365,19 @@ Function : update_move
 Updates all the Count
 '''
 def update_move():
-    global movecounter
+    if os.path.exists(f"{name}.json"):
+        checkpoint_load()
+        movecounter = movecounter1
+    else:
+        movecounter = 0
     count.clear()
     count.write(f"Moves:{movecounter}",font =("Arial",14,"bold"))
 
 '''
-Function : difficulty
+Function : difficulty_show
 Displays the Diificulty on Screen
 '''
-def difficulty():
+def difficulty_show():
     global q
     difficulty.write(f"Mode:{q}",font =("Arial",14,"bold"))
 
@@ -380,9 +386,14 @@ Function : update_time
 Displays the Time By Repeating Function For Every 1s
 '''
 def update_time():
-    global timecounter,p
+    global p
+    if os.path.exists(f"{name}.json"):
+        checkpoint_load()
+        timecounter = timecounter1
+    else:
+        timecounter = 0
     update_move()
-    difficulty()
+    difficulty_show()
     if p == 0:
         timecounter += 1
     else:
@@ -414,7 +425,6 @@ def checkwin():
         w.penup()
         w.goto(-250,-200)
         w.write(f"Congratulations , {name}\n You Won the Game ",font=("Arial", 36, "bold"))
-        print(storage)
         turtle.clearscreen()
         leaderboard()
         turtle.listen()
@@ -450,7 +460,6 @@ def up():
         writes((x,y))
         writes((x,y-100))
         empty_pos = (x,y-100)
-        storage.append(empty_pos)
         movecounter += 1
         update_move()
         checkwin()
@@ -465,7 +474,6 @@ def down():
         writes((x,y))
         writes((x,y+100))
         empty_pos = (x,y+100)
-        storage.append(empty_pos)
         movecounter += 1
         update_move()
         checkwin()
@@ -480,7 +488,6 @@ def left():
         writes((x,y))
         writes((x+100,y))
         empty_pos = (x+100,y)
-        storage.append(empty_pos)
         movecounter += 1
         update_move()
         checkwin()
@@ -495,7 +502,6 @@ def right():
         writes((x,y))
         writes((x-100,y))
         empty_pos = (x-100,y)
-        storage.append(empty_pos)
         movecounter += 1
         update_move()
         checkwin()
