@@ -129,7 +129,7 @@ hard4   = ['C','E','B','D','A','G','L','H','N','M','F','K','J','O','I','Z']
 Selects the Difficulty Arrangement Randomly
 '''
 #Finds Easy , Medium , Hard from the 4 sets
-easy = random.choice([easy1,easy2,easy3,easy4])
+easy = random.choice([easy2,easy3,easy4])
 medium = random.choice([medium1,medium2,medium3,medium4])
 hard = random.choice([hard1,hard2,hard3,hard4])
 
@@ -268,9 +268,9 @@ def checkpoint_load():
                
 #Selection of Diificulty and Assigning of Difficulty
 global q
-q = "Difficulty"
 
 if os.path.exists(f"{name}.json"):
+    global q
     choice = turtle.textinput("Checkpoint Found", "Do you want to continue? (Y/N)")
     if  choice in  ('Y','y'):
         checkpoint_load()
@@ -361,12 +361,12 @@ time.penup()
 time.goto(200,250)
 time.pendown()
 
-difficulty = turtle.Turtle()
-difficulty.pencolor("#00ff00")
-difficulty.hideturtle()
-difficulty.penup()
-difficulty.goto(-50,250)
-difficulty.pendown()
+difficult = turtle.Turtle()
+difficult.pencolor("#00ff00")
+difficult.hideturtle()
+difficult.penup()
+difficult.goto(-50,250)
+difficult.pendown()
 
 '''
 Function : update_move
@@ -383,7 +383,7 @@ Displays the Diificulty on Screen
 '''
 def difficulty_show():
     global q
-    difficulty.write(f"Mode:{q}",font =("Arial",14,"bold"))
+    difficult.write(f"Mode:{q}",font =("Arial",14,"bold"))
 
 def update_time():
     global timecounter, p
@@ -521,3 +521,4 @@ turtle.onkey(leaderboard,"L")
 
 
 turtle.mainloop()
+
