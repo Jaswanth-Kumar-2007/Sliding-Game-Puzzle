@@ -203,7 +203,7 @@ Prints the LeaderBoard By Keeping the Played members in Respective Difficulty an
 '''
 #Leaderboard Function
 def leaderboard():
-    global p
+    global p,difficulty,timecounter,movecounter
     p = 1
     turtle.clearscreen()
     y = turtle.Turtle()
@@ -222,8 +222,8 @@ def leaderboard():
               with open(file, "r") as t:
                   d = json.load(t)
               board_data = {eval(pos): val for pos, val in d["board"].items()}
-              timecounter = d.get("timecount", 0)
-              difficulty = d.get("difficulty", "Easy")
+              timecounter = d.get("timecounter1", 0)
+              difficulty = d.get("q", "Easy")
               leaderboarddata.append({
                 "name": i,
                 "time": timecounter,
@@ -511,5 +511,3 @@ turtle.onkey(leaderboard,"L")
 
 
 turtle.mainloop()
-        
-        
