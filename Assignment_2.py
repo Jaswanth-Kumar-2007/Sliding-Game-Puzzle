@@ -129,7 +129,7 @@ hard4   = ['C','E','B','D','A','G','L','H','N','M','F','K','J','O','I','Z']
 Selects the Difficulty Arrangement Randomly
 '''
 #Finds Easy , Medium , Hard from the 4 sets
-easy = random.choice([easy2,easy3,easy4])
+easy = random.choice([easy1,easy2,easy3,easy4])
 medium = random.choice([medium1,medium2,medium3,medium4])
 hard = random.choice([hard1,hard2,hard3,hard4])
 
@@ -254,7 +254,7 @@ Function : checkpoint_load
 #It Opens the Checkpoint of the player details of timecounter , movecounter , movevalues
 '''
 def checkpoint_load():
-    global board,timecounter,movecounter
+    global board,timecounter,movecounter,q
     file = f"{name}.json"
     if os.path.exists(file):
         with open(file, "r") as t:
@@ -263,6 +263,7 @@ def checkpoint_load():
         timecounter = d.get("timecounter1",0)
         movecounter = d.get("movecounter1",0)
         movevalues = d.get("movevalues",0)
+        q = d.get("difficulty",0)
     else:
         pass   
                

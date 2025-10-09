@@ -51,7 +51,7 @@ can open game and if you want to continue enter Y or y to proceed it loads your 
 
 - [x] Win Condition: Confirm the win check matches A → O followed by Z at the end.
 
-- [ ] Record Moves & Time: Store both move count and time (MM:SS) in the leaderboard JSON.
+- [x] Record Moves & Time: Store both move count and time (MM:SS) in the leaderboard JSON.
 
 - [x] Sort & Filter Leaderboard: Sort by difficulty → time, and display top-3 entries only.
 
