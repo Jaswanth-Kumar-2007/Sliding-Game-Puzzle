@@ -194,6 +194,8 @@ Defines the CheckPoint Variables
 board = {}
 empty_pos = None
 timecounter = 0
+movecounter = 0  
+
 
 '''
 Function : Leaderboard
@@ -250,12 +252,14 @@ Function : checkpoint_load
 #It Opens the Checkpoint
 '''
 def checkpoint_load():
-    global board
+    global board,timecounter,movecounter
     file = f"{name}.json"
     if os.path.exists(file):
         with open(file, "r") as t:
             d = json.load(t)
         board = {eval(pos): val for pos, val in d["board"].items()}
+        timecounter = d.get("timecounter1",0)
+        movecounter = d.get("movecounter1",0)
     else:
         pass   
                
@@ -323,9 +327,9 @@ def checkpoint_save():
     global q
     d = {
         "board": {str(pos): val for pos, val in board.items()},
-        "timecounter1":timecounter,
-        "movecounter1":movecounter,
-        "difficulty":q
+        "timecounter1": timecounter,
+        "movecounter1": movecounter,
+        "difficulty": q
     }
     with open(f"{name}.json", "w") as t:
         json.dump(d, t)
@@ -365,11 +369,7 @@ Function : update_move
 Updates all the Count
 '''
 def update_move():
-    if os.path.exists(f"{name}.json"):
-        checkpoint_load()
-        movecounter = movecounter1
-    else:
-        movecounter = 0
+    global movecounter
     count.clear()
     count.write(f"Moves:{movecounter}",font =("Arial",14,"bold"))
 
@@ -381,27 +381,16 @@ def difficulty_show():
     global q
     difficulty.write(f"Mode:{q}",font =("Arial",14,"bold"))
 
-'''
-Function : update_time
-Displays the Time By Repeating Function For Every 1s
-'''
 def update_time():
-    global p
-    if os.path.exists(f"{name}.json"):
-        checkpoint_load()
-        timecounter = timecounter1
-    else:
-        timecounter = 0
-    update_move()
-    difficulty_show()
+    global timecounter, p
     if p == 0:
         timecounter += 1
-    else:
-        timecounter += 0
     time.clear()
     minutes = timecounter // 60
     seconds = timecounter % 60
     time.write(f"Time: {minutes:02}:{seconds:02}", align="center", font=("Arial",14,"bold"))
+    update_move()
+    difficulty_show()
     turtle.ontimer(update_time, 1000)
 
 def closewindow():
