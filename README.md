@@ -1,4 +1,4 @@
-# Sliding-Game-Puzzle ✅
+# Sliding-Game-Puzzle 
 
 - [x] Blank Tile Start: Ensure that every new game starts with the blank tile at bottom-right (4,4).
 

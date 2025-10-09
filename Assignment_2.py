@@ -1,5 +1,5 @@
 '''
-Sliding Game Python
+#Sliding Game Python
 #Name : Jaswanth Kumar Kamireddi
 #ID No. : B25DS015
 #Branch : DSAI
@@ -58,7 +58,7 @@ j.screen.bgcolor("Black")
 j.pencolor("#00ff00")
 
 '''
-Take the Name Input 
+Take the Name Input for the person to store the date in name and to display about person in leaderboard 
 '''
 #Enter Name
 name = []
@@ -66,7 +66,7 @@ name = turtle.textinput("Welcome to Sliding Game:", "Enter your Name")
 
 '''
 Function : save_name
-Makes the Names to store in name_data.json file
+Makes the Names to store in name_data.json file to check that name in checkpoint to load
 '''
 #Saves All the Name of Players
 def save_name():
@@ -91,7 +91,7 @@ def load_name():
 '''
 Checks the name_data.json is there , if not there create that file
 '''
-# CHeck the First Time or Not (File Created or Not)
+# Check the First Time or Not (File Created or Not)
 file = "name_data.json"
 if os.path.exists(file):
     load_name()
@@ -146,7 +146,7 @@ j.pendown()
 
 '''
 Function : draw_grid
-#Draws the Sqaure
+#Draws the Sqaure defined only for 4x4
 '''
 #Square Outline Draw
 def draw_grid():
@@ -189,12 +189,14 @@ points = [(-150,150),(-50,150),(50,150),(150,150),(-150,50),(-50,50),(50,50),(15
 
 
 '''
-Defines the CheckPoint Variables
+Defines the CheckPoint Variables,timecounter,movecounter
 '''
 board = {}
-empty_pos = None
+empty_pos = "Z"
 timecounter = 0
 movecounter = 0  
+global movevalues
+movevalues = []
 
 
 '''
@@ -249,7 +251,7 @@ def leaderboard():
 
 '''
 Function : checkpoint_load
-#It Opens the Checkpoint
+#It Opens the Checkpoint of the player details of timecounter , movecounter , movevalues
 '''
 def checkpoint_load():
     global board,timecounter,movecounter
@@ -260,6 +262,7 @@ def checkpoint_load():
         board = {eval(pos): val for pos, val in d["board"].items()}
         timecounter = d.get("timecounter1",0)
         movecounter = d.get("movecounter1",0)
+        movevalues = d.get("movevalues",0)
     else:
         pass   
                
@@ -329,7 +332,8 @@ def checkpoint_save():
         "board": {str(pos): val for pos, val in board.items()},
         "timecounter1": timecounter,
         "movecounter1": movecounter,
-        "difficulty": q
+        "difficulty": q,
+        "movevalues":movevalues
     }
     with open(f"{name}.json", "w") as t:
         json.dump(d, t)
@@ -402,7 +406,7 @@ Function : checkwin()
 '''
 # Win Checking Condition
 def checkwin():
-    global p,storage
+    global p,storage,movevalues
     ordered = [(-150,150),(-50,150),(50,150),(150,150),(-150,50),(-50,50),(50,50),(150,50),(-150,-50),(-50,-50),(50,-50),(150,-50),(-150,-150),(-50,-150),(50,-150),(150,-150)]
     nums = [board[pos] for pos in ordered]
     if nums == ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','Z']:
@@ -416,6 +420,7 @@ def checkwin():
         w.write(f"Congratulations , {name}\n You Won the Game ",font=("Arial", 36, "bold"))
         turtle.clearscreen()
         leaderboard()
+        print(movevalues)
         turtle.listen()
         turtle.onkey(closewindow,"c")
         turtle.onkey(closewindow,"C")
@@ -442,7 +447,7 @@ Function : up(),down(),left(),right()
 '''
 #Up Function
 def up():
-    global empty_pos,movecounter,storage
+    global empty_pos,movecounter,storage,movevalues
     x,y = empty_pos
     if (x,y-100) in board:
         board[(x,y)], board[(x,y-100)] = board[(x,y-100)], board[(x,y)]
@@ -453,10 +458,11 @@ def up():
         update_move()
         checkwin()
         checkpoint_save()
+        movevalues.append("Up")
 
 # Down Function
 def down():
-    global empty_pos,movecounter,storage
+    global empty_pos,movecounter,storage,movevalues
     x,y = empty_pos
     if (x,y+100) in board:
         board[(x,y)], board[(x,y+100)] = board[(x,y+100)], board[(x,y)]
@@ -464,13 +470,15 @@ def down():
         writes((x,y+100))
         empty_pos = (x,y+100)
         movecounter += 1
+        movevalues.append("Down")
         update_move()
         checkwin()
         checkpoint_save()
 
+
 #Left Function
 def left():
-    global empty_pos,movecounter,storage
+    global empty_pos,movecounter,storage,movevalues
     x,y = empty_pos
     if (x+100,y) in board:
         board[(x,y)], board[(x+100,y)] = board[(x+100,y)], board[(x,y)]
@@ -478,13 +486,14 @@ def left():
         writes((x+100,y))
         empty_pos = (x+100,y)
         movecounter += 1
+        movevalues.append("Left")
         update_move()
         checkwin()
         checkpoint_save()
 
 # Right Function
 def right():
-    global empty_pos,movecounter,storage
+    global empty_pos,movecounter,storage,movevalues
     x,y = empty_pos
     if (x-100,y) in board:
         board[(x,y)], board[(x-100,y)] = board[(x-100,y)], board[(x,y)]
@@ -492,6 +501,7 @@ def right():
         writes((x-100,y))
         empty_pos = (x-100,y)
         movecounter += 1
+        movevalues.append("Right")
         update_move()
         checkwin()
         checkpoint_save()

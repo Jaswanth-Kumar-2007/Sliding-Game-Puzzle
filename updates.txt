@@ -1,0 +1,13 @@
+Your game is feature-rich: it draws the grid, uses A–O with a visible blank, 
+supports arrow-key moves, tracks moves + time (MM:SS), offers checkpoint/resume via JSON,
+ and shows a leaderboard (sorted by difficulty → time). The win check matches A→O + blank, and the shuffle uses predefined “easy/medium/hard” layouts—so it always starts solvable.
+  Code looks student-written overall (globals, multiple turtles, manual file I/O). No AI red flags;
+   the extra pip install comments for standard libs are unnecessary but harmless.
+
+Key fixes to align tightly with the rubric:
+ ensure the blank starts at bottom-right (4,4) on every new game; 
+ display the blank as “Z” (not None) per spec;
+record leaderboard with moves as well as time (and show top-3 only); 
+store an explicit move history (tile labels or directions) rather than just empty-tile coordinates; and simplify dependencies (remove random2, os-sys, pypi-json notes).
+ Also, clean up naming and add brief comments for core functions (draw, input, save/load, win check) for the handwritten write-up. 
+With these tweaks, you’re covering all required marks solidly.
